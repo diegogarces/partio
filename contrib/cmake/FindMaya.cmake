@@ -141,12 +141,22 @@ foreach(version ${_maya_TEST_VERSIONS})
 endforeach(version)
 
 # search for maya executable within the MAYA_LOCATION and PATH env vars and test paths
+message("Finding maya path")
+message($ENV{MAYA_LOCATION})
+#message(${MAYA_LOCATION})
+#message(${_maya_TEST_PATHS})
 find_program(MAYA_EXECUTABLE maya
     PATHS $ENV{MAYA_LOCATION} ${MAYA_LOCATION} ${_maya_TEST_PATHS}
     PATH_SUFFIXES bin
+    NO_DEFAULT_PATH
+    NO_CMAKE_ENVIRONMENT_PATH
+    NO_CMAKE_PATH
+    NO_CMAKE_SYSTEM_PATH
     NO_SYSTEM_ENVIRONMENT_PATH
     DOC "Maya's executable path")
 
+SET(MAYA_EXECUTABLE "C:/Program Files/Autodesk/Maya2015/bin/maya.exe")
+message(${MAYA_EXECUTABLE})
 if(MAYA_EXECUTABLE)
     # TODO: use GET_FILENAME_COMPONENT here
     # derive MAYA_LOCATION from MAYA_EXECUTABLE
@@ -277,6 +287,7 @@ find_path(MAYA_USER_DIR
         $ENV{HOME}/Library/Preferences/Autodesk/maya  # osx
         $ENV{USERPROFILE}/Documents/maya              # windows
         $ENV{HOME}/maya                               # linux
+        "C:/ilionData/Users/diego.garces/Documents/maya"
     DOC "Maya user home directory"
     NO_SYSTEM_ENVIRONMENT_PATH)
 

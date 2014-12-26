@@ -47,6 +47,7 @@ Some code for this format  was helped along  by referring to the official nextli
 #include <string>
 #include <memory>
 
+typedef unsigned int uint;
 
 namespace Partio{
 
@@ -89,7 +90,8 @@ ParticlesDataMutable* readRPC(const char* filename, const bool headersOnly)
 	ParticlesDataMutable* partData = headersOnly ? new ParticleHeaders: create();
     partData->addParticles(header.numParticles);
 	std::vector<const RPCFile::ChannelInfo*> chanInfoVec;
-	int sizeArry[header.numChannels];
+	//int sizeArry[header.numChannels];
+    int* sizeArry = new int[header.numChannels];
 	std::vector<void*> dataArrays;
 	std::vector<Partio::ParticleAttribute>  partAttrVec;
 
@@ -278,6 +280,8 @@ ParticlesDataMutable* readRPC(const char* filename, const bool headersOnly)
 			delete static_cast<uint8_t*>(dataArrays[chan]);
 		}
 	}
+
+    delete[] sizeArry;
 	reader.Close();
 	return partData;
 }
