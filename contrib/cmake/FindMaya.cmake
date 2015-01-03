@@ -142,7 +142,7 @@ endforeach(version)
 
 # search for maya executable within the MAYA_LOCATION and PATH env vars and test paths
 message("Finding maya path")
-message($ENV{MAYA_LOCATION})
+#message($ENV{MAYA_LOCATION})
 #message(${MAYA_LOCATION})
 #message(${_maya_TEST_PATHS})
 find_program(MAYA_EXECUTABLE maya
