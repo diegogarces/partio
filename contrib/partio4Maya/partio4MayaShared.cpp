@@ -252,7 +252,8 @@ void partio4Maya::updateFileName (MString cacheFile, MString cacheDir,
     else if (formatExt == "mc")
     {
         cachePadding = 1;
-        formatString = "%s%sFrame%0";
+        //formatString = "%s%s%sFrame%0";
+        formatString = "%s%s%s%0";
         int idx = cacheFile.rindexW("Frame");
 
         if (idx != -1)
@@ -275,7 +276,12 @@ void partio4Maya::updateFileName (MString cacheFile, MString cacheDir,
         s_str >> cacheFrame;
     }
 
-    sprintf(fileName, fmt, cacheDir.asChar(), cachePrefix.asChar(), preDelim.asChar(), cacheFrame, postDelim.asChar(), formatExt.asChar());
+    const char* szCacheDir = cacheDir.asChar();
+    const char* szCachePrefix = cachePrefix.asChar();
+    const char* szPreDelim = preDelim.asChar();
+    const char* szPostDelim = postDelim.asChar();
+    const char* szFormatExt = formatExt.asChar();
+    sprintf(fileName, fmt, szCacheDir, szCachePrefix, szPreDelim, cacheFrame, szPostDelim, szFormatExt);
 
     newCacheFile = fileName;
 
